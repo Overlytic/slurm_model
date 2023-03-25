@@ -15,8 +15,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './log:/var/log/slurm'
-      - './home:/home'
+      - './_log:/var/log/slurm'
+      - './_home:/home'
       - './../../slurm_sim_tools:/opt/cluster/slurm_sim_tools'
     cpuset: '0-3'
   n1:
@@ -31,8 +31,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/n1:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/n1:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   n2:
     image: nsimakov/slurm_compute_node:3
@@ -46,8 +46,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/n2:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/n2:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   n3:
     image: nsimakov/slurm_compute_node:3
@@ -61,8 +61,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/n3:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/n3:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   n4:
     image: nsimakov/slurm_compute_node:3
@@ -76,8 +76,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/n4:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/n4:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   m1:
     image: nsimakov/slurm_compute_node:3
@@ -91,8 +91,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  m1:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  m1:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   m2:
     image: nsimakov/slurm_compute_node:3
@@ -106,8 +106,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  m2:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  m2:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   m3:
     image: nsimakov/slurm_compute_node:3
@@ -121,8 +121,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  m3:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  m3:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   m4:
     image: nsimakov/slurm_compute_node:3
@@ -136,8 +136,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  m4:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  m4:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   b1:
     image: nsimakov/slurm_compute_node:3
@@ -151,8 +151,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  b1:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  b1:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
   g1:
     image: nsimakov/slurm_compute_node:3
@@ -166,8 +166,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/  g1:/var/log/slurm'
-      - './home:/home'
+      - './_compute_nodes_log/  g1:/var/log/slurm'
+      - './_home:/home'
     cpuset: '4-7'
 networks:
   network1:

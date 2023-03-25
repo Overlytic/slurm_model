@@ -71,6 +71,7 @@ docker compose rm -f -s -v
 docker exec -it micro3-headnode-1 bash
 ```
 
+
 Run number of simulation
 ```bash
 # Run shrinked jobs500
@@ -134,6 +135,17 @@ ${HOME}/slurm_sim_ws/slurm_sim_tools/src/run_sim.py \
         -r ${HOME}/slurm_sim_ws/slurm_model/micro2/results/small2_sim_v1_speed1/dtstart_10_1 \
         -a ${HOME}/slurm_sim_ws/slurm_model/micro2/utils/sacctmgr.script \
         -d -v -dtstart 10 --ignore-errors-in-conf
+
+```
+
+# Folder structure
+
+Folders with debugging info start with a underscore e.g. _log, _home, _compute_nodes
+
+# running multipe simulations 
+
+```bash
+./start_sim
 
 ```
 

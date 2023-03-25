@@ -32,8 +32,8 @@ services:
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './log:/var/log/slurm'
-      - './home:/home'
+      - './_log:/var/log/slurm'
+      - './_home:/home'
       - './../../slurm_sim_tools:/opt/cluster/slurm_sim_tools'
     cpuset: '0-3'
 """)
@@ -45,8 +45,8 @@ def get_compute_node_volumes(nodename):
       - './etc:/etc/slurm'
       - './vctools:/opt/cluster/vctools'
       - './job_traces:/opt/cluster/job_traces'
-      - './compute_nodes_log/{nodename}:/var/log/slurm'
-      - './home:/home'"""\
+      - './_compute_nodes_log/{nodename}:/var/log/slurm'
+      - './_home:/home'"""\
 
 
 for i in range(1,n_reg_old+1):
