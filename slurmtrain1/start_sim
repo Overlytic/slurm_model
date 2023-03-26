@@ -3,10 +3,9 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SCRIPT_DIR
 docker pull nsimakov/slurm_head_node:3
 docker pull nsimakov/slurm_compute_node:3
-RUN_NAME=small
-workload=small.events
+RUN_NAME=srun_010_fifo_1jt
+workload=srun_1jt.events
 MACHINE_NAME=`hostname`
-dtstart=30 #default parameter value
 
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -47,45 +46,44 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo "MACHINE_NAME ${MACHINE_NAME}"
+# echo "MACHINE_NAME ${MACHINE_NAME}"
 echo "RUN_NAME: ${RUN_NAME}"
 echo "workload ${workload}"
 
 # just in case try to remove old run
 docker compose stop;docker compose rm -f -s -v
 
-if [ ! -d "./results/${MACHINE_NAME}/${RUN_NAME}" ]
+if [ ! -d "./results/${RUN_NAME}" ]
 then
-  mkdir -p ./results/${MACHINE_NAME}/${RUN_NAME}
+  mkdir -p ./results/${RUN_NAME}
 fi
 
 # for dtstart in 58 59 68 79 89 99 105 114 126 146
 # do
-for replica in 1 2
-    do
-    cd $SCRIPT_DIR
-    pwd
-    echo "Start sim $dtstart $replica"
+# for replica in 1 2
+# do
 
-    rm _log/*;sudo rm -rf _compute_nodes_log/* ./_home/*
+cd $SCRIPT_DIR
+pwd
+echo "Start sim: $RUN_NAME"
 
-    echo dtstart $dtstart
+rm _log/*;sudo rm -rf _compute_nodes_log/* ./_home/*
 
-    docker compose up -d
+docker compose up -d
 
-    sleep 20
+sleep 20
 
-    docker exec micro3-headnode-1 /opt/cluster/slurm_sim_tools/src/slurmsimtools/run_slurm.py \
-        -s /usr -e /etc/slurm             \
-        -a /opt/cluster/vctools/sacctmgr.script \
-        -t /opt/cluster/job_traces/${workload} \
-        -r /root/results/${MACHINE_NAME}/${RUN_NAME}/dtstart_${dtstart}_${replica} -d -v -dtstart $dtstart --no-slurmd >& ./results/${MACHINE_NAME}/${RUN_NAME}/dtstart_${dtstart}_${replica}.out
+docker exec slurmtrain1-headnode-1 /opt/cluster/slurm_sim_tools/src/slurmsimtools/run_slurm.py \
+    -s /usr -e /etc/slurm             \
+    -a /opt/cluster/vctools/sacctmgr.script \
+    -t /opt/cluster/job_traces/${workload} \
+    -r /root/results/${RUN_NAME} -d -v --no-slurmd &> ./results/${RUN_NAME}.out
 
-    docker compose stop;docker compose rm -f -s -v
-    echo Done with $dtstart $replica
-done
+docker compose stop;docker compose rm -f -s -v
+echo Done with sim: $RUN_NAME
+#done
 # done
-rm -rf ./results/${MACHINE_NAME}/${RUN_NAME}/etc ./results/${MACHINE_NAME}/${RUN_NAME}/${workload}.events
-cp -r ./etc ./results/${MACHINE_NAME}/${RUN_NAME}/
-cp ./job_traces/${workload} ./results/${MACHINE_NAME}/${RUN_NAME}/
+rm -rf ./results/${RUN_NAME}/etc ./results/${RUN_NAME}/${workload}
+cp -r ./etc ./results/${RUN_NAME}/
+cp ./job_traces/${workload} ./results/${RUN_NAME}/
 echo Done

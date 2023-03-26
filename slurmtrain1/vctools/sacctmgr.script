@@ -1,0 +1,16 @@
+# add cluster
+add cluster Name=ilifu01 Fairshare=1 QOS=normal
+# add accounts
+# add account name=account0 Fairshare=100
+add account name=training Fairshare=100
+# add admin
+add user name=admin DefaultAccount=account1 MaxSubmitJobs=1000 AdminLevel=Administrator
+# add users
+add user name=user-001 DefaultAccount=training MaxSubmitJobs=1000
+add user name=user-002 DefaultAccount=training MaxSubmitJobs=1000
+add user name=user-003 DefaultAccount=training MaxSubmitJobs=1000
+add user name=user-004 DefaultAccount=training MaxSubmitJobs=1000
+add user name=user-005 DefaultAccount=training MaxSubmitJobs=1000
+
+# check results
+list associations format=Account,Cluster,User,Fairshare tree withd

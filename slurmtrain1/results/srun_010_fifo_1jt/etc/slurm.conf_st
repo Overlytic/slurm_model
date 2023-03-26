@@ -1,0 +1,124 @@
+# BASED ON ILIFU SLURM.CONF -> BUT ONLY UNCOMMENTED LINES
+# ALL COMMENTS ARE SETTINGS CHANGED FOR SLURM SIM
+
+AuthType=auth/munge
+
+SlurmUser=slurm
+SlurmdUser=root
+ControlMachine=headnode
+ControlAddr=headnode
+
+ReturnToService=1
+#CryptoType=crypto/openssl
+MessageTimeout=60
+JobRequeue=0
+
+JobCredentialPrivateKey=/etc/slurm/slurm.key
+JobCredentialPublicCertificate=/etc/slurm/slurm.cert
+
+
+#
+#Sim
+#JobCompType=jobcomp/filesacctout
+JobCompType=jobcomp/filetxt
+JobCompLoc=/var/log/slurm/jobcomp.log
+
+#PluginDir=/home/mikola/slurm_simulator3/slurm_deb/lib/slurm
+#PluginDir=/home/mikola/slurm_simulator3/slurm_opt/lib/slurm
+#JobCompType=jobcomp/filesacctout
+#JobCompLoc=/home/mikola/slurm_simulator3/sim/micro3/acct/jobcomp.log
+
+SlurmctldDebug=9
+SlurmdDebug=9
+# DebugFlags=Agent,Backfill,BackfillMap
+DebugFlags=Agent
+SlurmdParameters=config_overrides
+
+SlurmctldLogFile=/var/log/slurm/slurmctld.log
+SlurmdLogFile=/var/log/slurm/slurmd.log
+SlurmdSpoolDir=/var/spool
+StateSaveLocation=/var/state
+
+ProctrackType=proctrack/linuxproc
+SwitchType=switch/none
+# TopologyPlugin=topology/tree
+TopologyPlugin=topology/none
+TaskPlugin=task/none
+
+FirstJobId=1001
+
+UsePAM=0
+#GresTypes=gpu
+
+
+
+#
+# TIMERS
+SlurmctldTimeout=300
+SlurmdTimeout=300
+InactiveLimit=0
+MinJobAge=300
+KillWait=30
+Waittime=0
+
+# SCHEDULING (FAIRSHARE + BACKFILL
+
+# SchedulerType=sched/backfill
+# SchedulerParameters=bf_max_job_user=200,bf_window=1440,bf_interval=30,bf_max_time=30,sched_interval=60,bf_max_job_test=1200,default_queue_depth=1200,bf_continue
+# FairShareDampeningFactor=5
+# SlurmSchedLogFile=/var/log/slurm/sched.log
+# SelectType=select/cons_res
+# SelectTypeParameters=CR_Core_Memory,CR_CORE_DEFAULT_DIST_BLOCK
+# PriorityType=priority/multifactor
+# PriorityDecayHalfLife=0-4
+# PriorityFavorSmall=NO
+# PriorityWeightFairshare=50000
+# PriorityWeightAge=50000
+# PriorityWeightPartition=1000000
+# PriorityWeightJobSize=200000
+# PriorityWeightQOS=20000
+# PriorityMaxAge=0-5
+# EnforcePartLimits=YES
+
+SchedulerType=sched/builtin #sched/backfill
+SelectType=select/cons_res
+SelectTypeParameters=CR_CPU_Memory
+
+SlurmSchedLogFile=/var/log/slurm/sched.log
+
+# SIMULATING FIFO
+PriorityType=priority/multifactor
+# PriorityDecayHalfLife=0-4
+# PriorityFavorSmall=NO
+# PriorityWeightFairshare=50000
+# PriorityWeightAge=50000
+# PriorityWeightPartition=1000000
+# PriorityWeightJobSize=200000
+# PriorityWeightQOS=20000
+# PriorityMaxAge=0-5
+# EnforcePartLimits=YES
+
+# ACCOUNTING
+JobAcctGatherType=jobacct_gather/linux
+
+AccountingStorageType=accounting_storage/slurmdbd
+# AccountingStorageEnforce=associations,limits,qos
+AccountingStorageEnforce=limits,qos
+AccountingStoreFlags=job_comment
+
+AccountingStorageHost=headnode
+
+PropagateResourceLimits=NONE
+
+VSizeFactor=0
+KillOnBadExit=1
+
+ClusterName=ilifu01
+
+#DefaultStoragePort=29001
+#SlurmctldPort=29002
+
+NodeName=compute CPUs=32 RealMemory=237568 Sockets=32 CoresPerSocket=1 ThreadsPerCore=1 State=UP
+PartitionName=training Nodes=compute Default=YES MaxTime=14-00:00:00 DefMemPerCPU=6144 State=UP
+
+# PartitionName=normal Nodes=n[1-4],m[1-4],g1,b1 Default=YES DefMemPerCPU=2800 MaxTime=INFINITE State=UP
